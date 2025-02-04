@@ -15,7 +15,6 @@ const InvoiceFilter = (props) =>{
     }
 
 
-
     const filter = props.filter;
 
     return (
@@ -48,7 +47,7 @@ const InvoiceFilter = (props) =>{
                         value={filter.product}
                         type="text"
                         label="Produkt"
-                        prompt="Napište jméno produktu"
+                        prompt="Název produktu"
                     />
                 </div>
                 <div>
@@ -77,7 +76,7 @@ const InvoiceFilter = (props) =>{
                         handleChange={handleChange}
                         value={filter.limit}
                         type="number"
-                        label="limit"
+                        label="Limit"
                     
                     />
                 </div>
@@ -94,7 +93,7 @@ const InvoiceFilter = (props) =>{
 
             </div>
         </form>
-    )
+    );
 }
 
 export default InvoiceFilter;

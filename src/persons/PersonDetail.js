@@ -25,10 +25,13 @@ import {useParams} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
+import InvoiceTable from "../invoices/InvoiceTable";
 
 const PersonDetail = () => {
     const {id} = useParams();
     const [person, setPerson] = useState({});
+    const [salesState, setSales] = useState([]);
+    const [purchasesState, setPurchases] = useState([]);
 
     useEffect(() => {
         // TODO: Add HTTP req.
@@ -41,6 +44,12 @@ const PersonDetail = () => {
         })
     }, [id]);
     const country = Country.CZECHIA === person.country ? "Česká republika" : "Slovensko";
+
+    useEffect(() => {
+        apiGet("/api/identification/" + person.identificationNumber + "/sales").then((data) => setSales(data));
+        apiGet("/api/identification/" + person.identificationNumber + "/purchases").then((data) => setPurchases(data));
+    })
+
 
     return (
         <>
@@ -79,6 +88,43 @@ const PersonDetail = () => {
                     <br/>
                     {person.note}
                 </p>
+                
+                <h3 className="mt-5">Vystavené faktury:</h3>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <td className="col-3">Číslo faktury</td>
+                            <td>Poznámka</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {salesState.map((item) => (
+                           <tr>
+                                <td>{item.invoiceNumber}</td>
+                                <td>{item.note}</td>
+                           </tr> 
+                        ))}
+                    </tbody>
+                </table>
+
+                <h3 className="mt-5">Přijaté faktury</h3>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <td className="col-3">Číslo faktury</td>
+                            <td>Poznámka</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {purchasesState.map((item) => (
+                           <tr>
+                                <td >{item.invoiceNumber}</td>
+                                <td>{item.note}</td>
+                           </tr> 
+                        ))}
+                    </tbody>
+                </table>
+
             </div>
         </>
     );
