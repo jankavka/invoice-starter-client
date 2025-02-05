@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const PersonInvoices = ({invoicesType, label}) => {
 
@@ -23,7 +23,7 @@ const PersonInvoices = ({invoicesType, label}) => {
                 </tbody>
             </table>    
         </div>
-    )
+    );
 }
 
 export default PersonInvoices;
