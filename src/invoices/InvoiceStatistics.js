@@ -1,7 +1,10 @@
 import React, { useEffect, useState} from "react";
 import { apiGet } from "../utils/api";
 
-
+/**
+ * component which fetches invoice statistics from API
+ * @returns JSX as a table of invoice statistics
+ */
 const InvoiceStatistics = () => {
     const [currentYearSum, setCurrentYearSum] = useState("");
     const [allTimeSum, setAllTimeSum] = useState("");
@@ -18,9 +21,9 @@ const InvoiceStatistics = () => {
         })
     }, []);
 
-    return(
+    return (
         <div className="mt-3">
-            <h3>Statistiky faktur:</h3>
+            <h3>Statistiky všech faktur:</h3>
             <table className="table table-bordered">
                 <tbody>
                     <tr>

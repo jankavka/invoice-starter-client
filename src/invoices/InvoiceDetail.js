@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 
 import { apiGet } from "../utils/api";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const InvoiceDetail = () => {
     const {id} = useParams();
@@ -71,10 +71,15 @@ const InvoiceDetail = () => {
                 <br/>
                 {invoice.note}
             </p>
+            <div>
+                <Link to={"/invoices"} className="btn btn-success">
+                    Zpět
+                </Link>
+            </div>
             
         </div>
 
-    )
+    );
 
 }
 

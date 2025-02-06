@@ -21,7 +21,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 import {apiGet, apiPost, apiPut} from "../utils/api";
 
@@ -270,9 +270,18 @@ const PersonForm = () => {
                     }}
                     checked={Country.SLOVAKIA === person.country}
                 />
-
-                <input type="submit" className="btn btn-primary" value="Uložit"/>
+                <div className="row">
+                    <div className="col-1">
+                        <input type="submit" className="btn btn-primary" value="Uložit"/>
+                    </div>
+                    <div className="col-1">
+                        <Link to={"/persons"} className="btn btn-success">
+                            Zpět
+                        </Link>
+                    </div>
+                </div>
             </form>
+            
         </div>
     );
 };

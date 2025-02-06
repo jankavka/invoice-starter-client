@@ -55,7 +55,6 @@ const InvoiceIndex = () => {
     return(
         <div>
             <h1>Seznam faktur</h1>
-            <hr/>
             <InvoiceFilter
                 filter={filterState}
                 handleChange={handleChange}

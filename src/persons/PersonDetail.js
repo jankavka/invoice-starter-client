@@ -21,7 +21,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
@@ -99,6 +99,11 @@ const PersonDetail = () => {
                     invoicesType={purchasesState}
                     label="Přijaté faktury"
                 />
+            </div>
+            <div>
+                <Link to={"/persons"} className="btn btn-success">
+                    Zpět
+                </Link>
             </div>
         </>
     );

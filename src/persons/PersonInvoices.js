@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * component which fetches from API invoices of conrete person based od invoiceType
+ * @param {*} props 
+ * @param {Object} invoiceType sets an type of invoice according to concrete person (purchase or sale)
+ * @returns a table with invoices represented by invoiceNumber and note
+ */
 const PersonInvoices = ({invoicesType, label}) => {
 
 
