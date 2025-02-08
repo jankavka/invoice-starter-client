@@ -50,10 +50,10 @@ const InvoiceDetail = () => {
 
 
     return (
-        <div>
+        <div className="text-light">
             <h1>Detail faktury</h1>
             <br/>
-            <table className="table table-striped">
+            <table className="table text-light">
                 
                     <tbody>
                         <tr>
@@ -104,7 +104,7 @@ const InvoiceDetail = () => {
                     </tbody>
                 </table>
             <div>
-                <button onClick={handleGoBack} className="btn btn-success">
+                <button onClick={handleGoBack} className="btn btn-outline-success">
                     Zpět
                 </button>
             </div>

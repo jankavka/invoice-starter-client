@@ -41,15 +41,15 @@ export function App() {
   return (
     <Router>
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-nav">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/persons"} className="nav-link">
+              <Link to={"/persons"} className="nav-link text-light fs-2">
                 Osoby
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/invoices"} className="nav-link">
+              <Link to={"/invoices"} className="nav-link text-light fs-2">
                 Faktury
               </Link>
             </li>

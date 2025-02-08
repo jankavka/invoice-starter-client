@@ -26,7 +26,7 @@ export function InputField(props) {
       {isTextarea ? (
         <textarea
           required={required}
-          className="form-control"
+          className="form-control bg-input text-light"
           placeholder={props.prompt}
           rows={props.rows}
           minLength={minlength}
@@ -38,7 +38,7 @@ export function InputField(props) {
         <input
           required={required}
           type={type}
-          className="form-control"
+          className="form-control bg-input text-light"
           placeholder={props.prompt}
           minLength={minlength}
           min={min}

@@ -64,7 +64,7 @@ const PersonDetail = () => {
                 <hr/>
                 <div className="row mb-3">
                     <div className="col">
-                        <table className="table">
+                        <table className="table text-light">
                             <tbody>
                                 <tr>
                                     <td className="fw-bold col-6">DIČ</td>
@@ -117,7 +117,7 @@ const PersonDetail = () => {
                 
             </div>
             <div>
-                <button onClick={handleGoBack} className="btn btn-success">
+                <button onClick={handleGoBack} className="btn btn-outline-success">
                     Zpět
                 </button>
             </div>

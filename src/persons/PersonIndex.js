@@ -44,7 +44,7 @@ const PersonIndex = () => {
     }, []);
 
     return (
-        <div>
+        <div className="text-light">
             <h1>Seznam osob</h1>
             <PersonTable
                 deletePerson={deletePerson}

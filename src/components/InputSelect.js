@@ -14,7 +14,7 @@ export function InputSelect(props) {
       <label>{props.label}:</label>
       <select
         required={required}
-        className="browser-default form-select"
+        className="browser-default form-select bg-input text-light"
         multiple={multiple}
         name={props.name}
         onChange={props.handleChange}

@@ -32,7 +32,7 @@ const PersonTable = ({label, items, deletePerson}) => {
                 {label} {items.length}
             </p>
 
-            <table className="table table-bordered">
+            <table className="table table-bordered text-light">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -54,19 +54,19 @@ const PersonTable = ({label, items, deletePerson}) => {
                             <div className="btn-group">
                                 <Link
                                     to={"/persons/show/" + item._id}
-                                    className="btn btn-sm btn-info"
+                                    className="btn btn-sm btn-outline-info"
                                 >
                                     Zobrazit
                                 </Link>
                                 <Link
                                     to={"/persons/edit/" + item._id}
-                                    className="btn btn-sm btn-warning"
+                                    className="btn btn-sm btn-outline-warning"
                                 >
                                     Upravit
                                 </Link>
                                 <button
                                     onClick={() => deletePerson(item._id)}
-                                    className="btn btn-sm btn-danger"
+                                    className="btn btn-sm btn-outline-danger"
                                 >
                                     Odstranit
                                 </button>
@@ -76,7 +76,7 @@ const PersonTable = ({label, items, deletePerson}) => {
                 ))}
                 </tbody>
             </table>
-            <Link to={"/persons/create"} className="btn btn-success">
+            <Link to={"/persons/create"} className="btn btn-outline-success">
                 Nová osoba
             </Link>
         </div>

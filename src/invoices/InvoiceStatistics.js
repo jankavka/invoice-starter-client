@@ -24,7 +24,7 @@ const InvoiceStatistics = () => {
     return (
         <div className="mt-3">
             <h4>Statistiky všech faktur:</h4>
-            <table className="table table-bordered">
+            <table className="table table-bordered text-light">
                 <tbody>
                     <tr>
                         <td className="col-8">Součet cen v akutálním roce:</td>

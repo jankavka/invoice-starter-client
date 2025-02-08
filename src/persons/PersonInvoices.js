@@ -14,7 +14,7 @@ const PersonInvoices = ({invoicesType, label}) => {
         <div className="table-responsive">
     
             <h4>{label}</h4>
-            <table className="table">
+            <table className="table text-light">
                 <thead>
                     <tr>
                         <td className="col fw-bold col-6">Číslo faktury</td>

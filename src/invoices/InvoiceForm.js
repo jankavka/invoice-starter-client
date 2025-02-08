@@ -61,8 +61,8 @@ const InvoiceForm = () => {
 
 
     return(
-        <div>
-            <h1>Vyrtvořit fakturu</h1>
+        <div className="text-light">
+            <h1>Vytvořit fakturu</h1>
             <hr/>
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>)
@@ -74,115 +74,139 @@ const InvoiceForm = () => {
                 />
             )}
             <form onSubmit={handleSubmit}>
-                <InputField
-                    required = {true}
-                    type = "number"
-                    name = "invoiceNumber"
-                    min = "3"
-                    label = "Číslo faktury"
-                    prompt = "Zadejte číslo faktury"
-                    value = {invoice.invoiceNumber}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, invoiceNumber: e.target.value});
-                    }}
-                />
-                <InputSelect
-                    required = {true}
-                    //multiple = {true}
-                    name = "seller"
-                    items = {personList}
-                    label = "Prodejce"
-                    prompt = "Vyberte prodejce"
-                    value = {invoice.seller}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, seller: {_id :e.target.value}})
-                    }}
-                />
-                <InputSelect
-                    required = {true}
-                    //multiple = {true}
-                    name = "buyer"
-                    items = {personList}
-                    label = "Kupující"
-                    prompt = "Vyberte kupujícího"
-                    value = {invoice.buyer}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, buyer:{_id: e.target.value}})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "date"
-                    name = "issued"
-                    label = "Vystaveno"
-                    prompt = "Doplňte datum vystavení"
-                    value = {invoice.issued}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, issued: e.target.value})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "date"
-                    name = "dueDate"
-                    label = "Datum splatnosti"
-                    prompt = "Doplňte datum splatnosti"
-                    value = {invoice.dueDate}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, dueDate: e.target.value})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "text"
-                    name = "product"
-                    min = "3"
-                    label = "Název Produktu"
-                    prompt = "Vyplňte název produktu"
-                    value = {invoice.product}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, product: e.target.value})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "number"
-                    name = "price"
-                    label = "Cena (Kč)"
-                    prompt = "Vyplňte název produktu"
-                    value = {invoice.price}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, price: e.target.value})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "number"
-                    name = "vat"
-                    label = "DPH"
-                    prompt = "DPH"
-                    value = {invoice.vat}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, vat: e.target.value})
-                    }}
-                />
-                <InputField
-                    required = {true}
-                    type = "text"
-                    name = "note"
-                    label = "Poznámka"
-                    prompt = "Poznámka"
-                    value = {invoice.note}
-                    handleChange = {(e) => {
-                        setInvoice({...invoice, note: e.target.value})
-                    }}
-                />
-                <div className="row mt-3">
-                    <div className="col-1">
-                        <button type="sumbit" className="btn btn-primary ">Uložit</button>
+                <div className="row mb-3">
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "number"
+                            name = "invoiceNumber"
+                            min = "3"
+                            label = "Číslo faktury"
+                            prompt = "Zadejte číslo faktury"
+                            value = {invoice.invoiceNumber}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, invoiceNumber: e.target.value});
+                            }}
+                        />
                     </div>
-                    <div className="col-1">
-                        <Link to={"/invoices"} className="btn btn-success">
+                    <div className="col-md-4">
+                        <InputSelect
+                            required = {true}
+                            //multiple = {true}
+                            name = "seller"
+                            items = {personList}
+                            label = "Prodejce"
+                            prompt = "Vyberte prodejce"
+                            value = {invoice.seller}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, seller: {_id :e.target.value}})
+                            }}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <InputSelect
+                            required = {true}
+                            //multiple = {true}
+                            name = "buyer"
+                            items = {personList}
+                            label = "Kupující"
+                            prompt = "Vyberte kupujícího"
+                            value = {invoice.buyer}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, buyer:{_id: e.target.value}})
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "date"
+                            name = "issued"
+                            label = "Vystaveno"
+                            prompt = "Doplňte datum vystavení"
+                            value = {invoice.issued}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, issued: e.target.value})
+                            }}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "date"
+                            name = "dueDate"
+                            label = "Datum splatnosti"
+                            prompt = "Doplňte datum splatnosti"
+                            value = {invoice.dueDate}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, dueDate: e.target.value})
+                            }}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "text"
+                            name = "product"
+                            min = "3"
+                            label = "Název Produktu"
+                            prompt = "Vyplňte název produktu"
+                            value = {invoice.product}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, product: e.target.value})
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "number"
+                            name = "price"
+                            label = "Cena (Kč)"
+                            prompt = "Vyplňte název produktu"
+                            value = {invoice.price}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, price: e.target.value})
+                            }}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "number"
+                            name = "vat"
+                            label = "DPH"
+                            prompt = "DPH"
+                            value = {invoice.vat}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, vat: e.target.value})
+                            }}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <InputField
+                            required = {true}
+                            type = "text"
+                            name = "note"
+                            label = "Poznámka"
+                            prompt = "Poznámka"
+                            value = {invoice.note}
+                            handleChange = {(e) => {
+                                setInvoice({...invoice, note: e.target.value})
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="row mt-3">
+                    <div className="col-md-1 col-2">
+                        <button type="sumbit" className="btn btn-outline-primary ">Uložit</button>
+                    </div>
+                    <div className="col-md-1 col-2">
+                        <Link to={"/invoices"} className="btn btn-outline-success">
                             Zpět
                         </Link>
                     </div>

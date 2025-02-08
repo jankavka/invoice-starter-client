@@ -31,7 +31,7 @@ const InvoiceFilter = (props) =>{
     const filter = props.filter;
 
     return (
-        <div className="mt-4">
+        <div className="mt-4 text-light">
             <h6>Filtrační parametry</h6>
                 <form onSubmit={handleSubmit}>
                     <div className="row mb-3">
@@ -62,7 +62,7 @@ const InvoiceFilter = (props) =>{
                                 value={filter.product !== undefined ? filter.product : ""}
                                 type="text"
                                 label="Produkt"
-                                prompt="Název produktu"
+                                prompt="nezadáno"
                             />
                         </div>
                     </div>
@@ -74,7 +74,7 @@ const InvoiceFilter = (props) =>{
                                 value={filter.minPrice !== undefined ? filter.minPrice : ""}
                                 type="number"
                                 label="Cena od"
-                                prompt="--zadejte minimální částku--"
+                                prompt="nezadáno"
                             />
                         </div>
                         <div className="col">
@@ -84,7 +84,7 @@ const InvoiceFilter = (props) =>{
                                 value={filter.maxPrice !== undefined ? filter.maxPrice : ""}
                                 type="number"
                                 label="Cena do"
-                                prompt="--zadejte maximílní částku--"
+                                prompt="nezadáno"
                             />
                         </div>
                         <div className="col">
@@ -94,7 +94,7 @@ const InvoiceFilter = (props) =>{
                                 value={filter.limit !== undefined ? filter.limit : ""}
                                 type="number"
                                 label="Limit"
-                                prompt="--zadejte limit zobrazených výsledků--"
+                                prompt="nezadáno"
                             
                             />
                         </div>
@@ -103,12 +103,12 @@ const InvoiceFilter = (props) =>{
                         <div className="">
                             <input
                                 type="submit"
-                                className="btn btn-info me-2"
+                                className="btn btn-outline-info me-2"
                                 value={props.confirm}
                             />
                         </div>
                         <div>
-                            <button onClick={handleReset} className="btn btn-warning text-dark">
+                            <button onClick={handleReset} className="btn btn-outline-warning">
                                 Reset
                             </button>
                         </div>

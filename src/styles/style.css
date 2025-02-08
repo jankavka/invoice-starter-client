@@ -1,0 +1,18 @@
+.bg-input{
+    color: white;
+    background-color: rgb(152, 152, 152);
+}
+
+.bg-input:focus{
+    color: white;
+    background-color: rgb(152, 152, 152);
+}
+
+.bg-input::placeholder{
+    color: white;
+    background-color: rgb(152, 152, 152);
+}
+
+.bg-nav{
+    background-color: rgb(133, 133, 133);
+}

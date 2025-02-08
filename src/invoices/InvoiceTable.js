@@ -5,7 +5,7 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
     return(
     <div>
         <p>{label} {items.length}</p>
-        <table className="table table-bordered">
+        <table className="table table-bordered text-light">
             <thead>
                 <tr>
                     <th>#</th>
@@ -24,19 +24,19 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
                             <div className="btn-group">
                                 <Link
                                     to={"/invoices/show/" + item._id}
-                                    className="btn btn-sm btn-info"
+                                    className="btn btn-sm btn-outline-info"
                                 >
                                     Detail
                                 </Link>
                                 <Link
                                     to={"/invoices/edit/" + item._id}
-                                    className="btn btn-sm btn-warning"
+                                    className="btn btn-sm btn-outline-warning"
                                 >
                                     Upravit
                                 </Link>
                                 <button
                                     onClick={() => deleteInvoice(item._id)}
-                                    className="btn btn-sm btn-danger"
+                                    className="btn btn-sm btn-outline-danger"
                                     >   
                                     Vymazat
                                 </button>
@@ -47,7 +47,7 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
                 ))}
             </tbody>
         </table>
-        <Link to={"/invoices/create"} className="btn btn-success">
+        <Link to={"/invoices/create"} className="btn btn-outline-success">
                 Nová faktura
             </Link>
     </div>
