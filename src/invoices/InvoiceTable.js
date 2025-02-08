@@ -11,7 +11,7 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
                     <th>#</th>
                     <th>Číslo faktury</th>
                     <th>Poznámka</th>
-                    <th>Akce</th>
+                    <th className="col-4">Akce</th>
                 </tr>
             </thead>
             <tbody>

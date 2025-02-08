@@ -21,7 +21,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
@@ -33,6 +33,11 @@ const PersonDetail = () => {
     const [person, setPerson] = useState({});
     const [salesState, setSales] = useState([]);
     const [purchasesState, setPurchases] = useState([]);
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1);
+    }
 
     useEffect(() => {
         // TODO: Add HTTP req.
@@ -55,55 +60,66 @@ const PersonDetail = () => {
     return (
         <>
             <div>
-                <h1>Detail osoby</h1>
+                <h1>Detail osoby: {person.name}</h1>
                 <hr/>
-                <h3>{person.name} ({person.identificationNumber})</h3>
-                <p>
-                    <strong>DIČ:</strong>
-                    <br/>
-                    {person.taxNumber}
-                </p>
-                <p>
-                    <strong>Bankovní účet:</strong>
-                    <br/>
-                    {person.accountNumber}/{person.bankCode} ({person.iban})
-                </p>
-                <p>
-                    <strong>Tel.:</strong>
-                    <br/>
-                    {person.telephone}
-                </p>
-                <p>
-                    <strong>Mail:</strong>
-                    <br/>
-                    {person.mail}
-                </p>
-                <p>
-                    <strong>Sídlo:</strong>
-                    <br/>
-                    {person.street}, {person.city},
-                    {person.zip}, {country}
-                </p>
-                <p>
-                    <strong>Poznámka:</strong>
-                    <br/>
-                    {person.note}
-                </p>
+                <div className="row mb-3">
+                    <div className="col">
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <td className="fw-bold col-6">DIČ</td>
+                                    <td>{person.taxNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">IČO</td>
+                                    <td>{person.identificationNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Bankovní účet</td>
+                                    <td>{person.accountNumber}/{person.bankCode} ({person.iban})</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Tel.:</td>
+                                    <td>{person.telephone}</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Mail</td>
+                                    <td>{person.mail}</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Sídlo</td>
+                                    <td>{person.street}, {person.city},
+                                    {person.zip}, {country}</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Poznámka</td>
+                                    <td>{person.note}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <PersonInvoices
+                            invoicesType={salesState}
+                            label="Vystavené faktury"
+                        />
+                    </div>
 
-                <PersonInvoices
-                    invoicesType={salesState}
-                    label="Vystavené faktury"
-                />
-
-                <PersonInvoices
-                    invoicesType={purchasesState}
-                    label="Přijaté faktury"
-                />
+                    <div className="col">
+                        <PersonInvoices
+                            invoicesType={purchasesState}
+                            label="Přijaté faktury"
+                        />
+                    </div>
+                </div>
+                
             </div>
             <div>
-                <Link to={"/persons"} className="btn btn-success">
+                <button onClick={handleGoBack} className="btn btn-success">
                     Zpět
-                </Link>
+                </button>
             </div>
         </>
     );

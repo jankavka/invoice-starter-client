@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import InputSelect from "../components/InputSelect";
 import InputField from "../components/InputField";
 
@@ -15,7 +15,6 @@ import InputField from "../components/InputField";
  */
 const InvoiceFilter = (props) =>{
 
-
     const handleChange = (e) =>{
         props.handleChange(e);
     }
@@ -24,6 +23,10 @@ const InvoiceFilter = (props) =>{
         props.handleSubmit(e);
     }
 
+    const handleReset = (e) => {
+        e.preventDefault();
+        props.handleReset();    
+    }
 
     const filter = props.filter;
 
@@ -36,7 +39,7 @@ const InvoiceFilter = (props) =>{
                             <InputSelect
                                 name="buyerId"
                                 handleChange={handleChange}
-                                value={filter.buyerId}
+                                value={filter.buyerId !== undefined ? filter.buyerId : ""}
                                 items={props.persons}
                                 label="Kupující"
                                 prompt="nevybrán"
@@ -46,7 +49,7 @@ const InvoiceFilter = (props) =>{
                             <InputSelect
                                 name="sellerId"
                                 handleChange={handleChange}
-                                value={filter.sellerId}
+                                value={filter.sellerId !== undefined ? filter.sellerId : ""}
                                 items={props.persons}
                                 label="Prodejce"
                                 prompt="nevybrán"
@@ -56,7 +59,7 @@ const InvoiceFilter = (props) =>{
                             <InputField
                                 name="product"
                                 handleChange={handleChange}
-                                value={filter.product}
+                                value={filter.product !== undefined ? filter.product : ""}
                                 type="text"
                                 label="Produkt"
                                 prompt="Název produktu"
@@ -68,7 +71,7 @@ const InvoiceFilter = (props) =>{
                             <InputField
                                 name="minPrice"
                                 handleChange={handleChange}
-                                value={filter.minPrice}
+                                value={filter.minPrice !== undefined ? filter.minPrice : ""}
                                 type="number"
                                 label="Cena od"
                                 prompt="--zadejte minimální částku--"
@@ -78,7 +81,7 @@ const InvoiceFilter = (props) =>{
                             <InputField
                                 name="maxPrice"
                                 handleChange={handleChange}
-                                value={filter.maxPrice}
+                                value={filter.maxPrice !== undefined ? filter.maxPrice : ""}
                                 type="number"
                                 label="Cena do"
                                 prompt="--zadejte maximílní částku--"
@@ -88,7 +91,7 @@ const InvoiceFilter = (props) =>{
                             <InputField
                                 name="limit"
                                 handleChange={handleChange}
-                                value={filter.limit}
+                                value={filter.limit !== undefined ? filter.limit : ""}
                                 type="number"
                                 label="Limit"
                                 prompt="--zadejte limit zobrazených výsledků--"
@@ -96,13 +99,18 @@ const InvoiceFilter = (props) =>{
                             />
                         </div>
                     </div>
-                    <div className="row mb-3">
-                        <div className="col">
+                    <div className="col-12 d-flex mb-3">
+                        <div className="">
                             <input
                                 type="submit"
-                                className="btn btn-info float-right mt-2"
+                                className="btn btn-info me-2"
                                 value={props.confirm}
                             />
+                        </div>
+                        <div>
+                            <button onClick={handleReset} className="btn btn-warning text-dark">
+                                Reset
+                            </button>
                         </div>
                     </div>
                 </form>

@@ -10,10 +10,10 @@ const InvoiceIndex = () => {
     const [personsState, setPersonsState] = useState([]);
     const [filterState, setFilterState] = useState({
         buyerId: undefined,
-        sellerId: undefined,
+        sellerId:undefined,
         product: undefined,
         minPrice: undefined,
-        maxPrice:undefined,
+        maxPrice: undefined,
         limit: undefined,
     });
 
@@ -49,7 +49,18 @@ const InvoiceIndex = () => {
         e.preventDefault();
         const params = filterState;
         apiGet("/api/invoices", params).then((data) => setInvoices(data));
+    };
 
+
+    const handleReset = () => {
+        setFilterState({
+            buyerId: undefined,
+            sellerId:undefined,
+            product: undefined,
+            minPrice: undefined,
+            maxPrice: undefined,
+            limit: undefined,
+        })
     }
 
     return(
@@ -59,6 +70,7 @@ const InvoiceIndex = () => {
                 filter={filterState}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
+                handleReset={handleReset}
                 persons={personsState}
                 confirm="Vyhledej"
 

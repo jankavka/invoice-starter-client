@@ -23,11 +23,11 @@ const InvoiceStatistics = () => {
 
     return (
         <div className="mt-3">
-            <h3>Statistiky všech faktur:</h3>
+            <h4>Statistiky všech faktur:</h4>
             <table className="table table-bordered">
                 <tbody>
                     <tr>
-                        <td>Součet cen v akutálním roce:</td>
+                        <td className="col-8">Součet cen v akutálním roce:</td>
                         <td>{currentYearSum} Kč</td>
                     </tr>
                     <tr>

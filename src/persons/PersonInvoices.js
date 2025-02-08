@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /**
  * component which fetches from API invoices of conrete person based od invoiceType
@@ -10,19 +11,20 @@ const PersonInvoices = ({invoicesType, label}) => {
 
 
     return(
-        <div>
-            <h3 className="mt-5">{label}</h3>
-            <table className="table table-striped">
+        <div className="table-responsive">
+    
+            <h4>{label}</h4>
+            <table className="table">
                 <thead>
                     <tr>
-                        <td className="col-3">Číslo faktury</td>
-                        <td>Poznámka</td>
+                        <td className="col fw-bold col-6">Číslo faktury</td>
+                        <td className="fw-bold">Poznámka</td>
                     </tr>
                 </thead>
                 <tbody>
                     {invoicesType.map((item) => (
                         <tr>
-                            <td>{item.invoiceNumber}</td>
+                            <td><Link to={"/invoices/show/" + item._id}>{item.invoiceNumber}</Link></td>
                             <td>{item.note}</td>
                        </tr> 
                     ))}
