@@ -20,11 +20,10 @@
  * Více informací na http://www.itnetwork.cz/licence
  */
 
-import React from "react";
+import React,{useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Routes,
   Navigate,
@@ -36,41 +35,34 @@ import PersonForm from "./persons/PersonForm";
 import InvoiceForm from "./invoices/InvoiceForm";
 import InvoiceIndex from "./invoices/InvoiceIndex";
 import InvoiceDetail from "./invoices/InvoiceDetail";
+import NavigationLink from "./components/NavigationLink";
 
 export function App() {
+  
+  
   return (
     <Router>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-nav">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/persons"} className="nav-link text-light fs-2">
-                Osoby
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/invoices"} className="nav-link text-light fs-2">
-                Faktury
-              </Link>
-            </li>
-          </ul>
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-nav mb-3">
+          <NavigationLink/>
         </nav>
-
-        <Routes>
-          <Route index element={<Navigate to={"/persons"} />} />
-          <Route path="/persons">
-            <Route index element={<PersonIndex />} />
-            <Route path="show/:id" element={<PersonDetail />} />
-            <Route path="create" element={<PersonForm />} />
-            <Route path="edit/:id" element={<PersonForm />} />
-          </Route>
-          <Route path="/invoices">
-            <Route index element={<InvoiceIndex/>} />
-            <Route path="create" element={<InvoiceForm />}/>
-            <Route path="edit/:id" element={<InvoiceForm/>}/>
-            <Route path="show/:id" element={<InvoiceDetail/>}/>
-          </Route>
-        </Routes>
+        <div className="container">
+          <Routes>
+            <Route index element={<Navigate to={"/persons"} />} />
+            <Route path="/persons">
+              <Route index element={<PersonIndex />} />
+              <Route path="show/:id" element={<PersonDetail />} />
+              <Route path="create" element={<PersonForm />} />
+              <Route path="edit/:id" element={<PersonForm />} />
+            </Route>
+            <Route path="/invoices">
+              <Route index element={<InvoiceIndex/>} />
+              <Route path="create" element={<InvoiceForm />}/>
+              <Route path="edit/:id" element={<InvoiceForm/>}/>
+              <Route path="show/:id" element={<InvoiceDetail/>}/>
+            </Route>
+          </Routes>
+        </div>
       </div>
     </Router>
   );

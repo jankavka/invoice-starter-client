@@ -11,7 +11,7 @@ export function InputSelect(props) {
 
   return (
     <div className="form-group">
-      <label>{props.label}:</label>
+      <label className="form-label">{props.label}:</label>
       <select
         required={required}
         className="browser-default form-select bg-input text-light"

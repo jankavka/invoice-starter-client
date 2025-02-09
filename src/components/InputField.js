@@ -20,7 +20,7 @@ export function InputField(props) {
 
   return (
     <div className="form-group">
-      <label>{props.label}:</label>
+      <label className="form-label">{props.label}:</label>
 
       {/* vykreslení aktuálního elementu */}
       {isTextarea ? (

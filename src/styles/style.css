@@ -16,3 +16,16 @@
 .bg-nav{
     background-color: rgb(133, 133, 133);
 }
+
+.style-footer{
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid grey ;
+}
+
+.clicked-nav{
+    border: 1px solid black;
+    color:black;
+}
