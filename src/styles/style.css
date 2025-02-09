@@ -25,7 +25,24 @@
     border-top: 1px solid grey ;
 }
 
-.clicked-nav{
-    border: 1px solid black;
-    color:black;
+@media(min-width:481px){
+    .clicked-nav{
+        border: 1px solid black;
+        color:black;
+        text-align: start;
+        padding-left: 3px;
+        margin-left: 0px;
+    }
+}
+
+@media (max-width:480px){
+    .clicked-nav{
+        border: 1px solid black;
+        color:black;
+        text-align: start;
+        padding-left: 3px;
+        margin-left: 0px;
+        width: 25%;
+        
+    }
 }

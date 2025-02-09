@@ -5,7 +5,7 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
     return(
     <div>
         <p>{label} {items.length}</p>
-        <table className="table table-bordered text-light">
+        <table className="table table-bordered text-light table-responsive">
             <thead>
                 <tr>
                     <th>#</th>

@@ -32,7 +32,7 @@ const PersonTable = ({label, items, deletePerson}) => {
                 {label} {items.length}
             </p>
 
-            <table className="table table-bordered text-light">
+            <table className="table table-bordered text-light table-responsive">
                 <thead>
                 <tr>
                     <th>#</th>

@@ -22,6 +22,7 @@
 
 import React,{useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import {
   BrowserRouter as Router,
   Route,
@@ -35,7 +36,7 @@ import PersonForm from "./persons/PersonForm";
 import InvoiceForm from "./invoices/InvoiceForm";
 import InvoiceIndex from "./invoices/InvoiceIndex";
 import InvoiceDetail from "./invoices/InvoiceDetail";
-import NavigationLink from "./components/NavigationLink";
+import NavigationLinks from "./components/NavigationLinks";
 
 export function App() {
   
@@ -43,9 +44,7 @@ export function App() {
   return (
     <Router>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-nav mb-3">
-          <NavigationLink/>
-        </nav>
+        <NavigationLinks/>
         <div className="container">
           <Routes>
             <Route index element={<Navigate to={"/persons"} />} />
