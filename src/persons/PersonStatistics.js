@@ -9,7 +9,7 @@ import { apiGet } from "../utils/api";
  */
 const PersonStatistics = ({id}) => {
     const [personStatisticsState, setPersonStatistics] = useState([]);
-    const [revenueState, setRevenueState] = useState("")
+    const [revenueState, setRevenueState] = useState("");
 
 
     useEffect(() => {

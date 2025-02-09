@@ -43,6 +43,13 @@ const PersonIndex = () => {
         apiGet("/api/persons").then((data) => setPersons(data));
     }, []);
 
+    if(persons.length === 0 ){
+        return (
+            <div>
+                Načítám...
+            </div>
+        );
+    }
     return (
         <div className="text-light">
             <h1>Seznam osob</h1>

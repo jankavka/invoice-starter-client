@@ -21,7 +21,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {Link, useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
@@ -57,6 +57,19 @@ const PersonDetail = () => {
     },[person])
 
 
+    if(Object.keys(person).length === 0){
+        return(
+            <div className="mt-3">
+                Načítám detail osoby...
+                <div>
+                    <button onClick={handleGoBack} className="btn btn-outline-success">
+                        Zpět
+                    </button>
+                </div>
+            </div>
+            
+        );
+    }
     return (
         <>
             <div>

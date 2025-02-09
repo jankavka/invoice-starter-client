@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 
 /**
  * Made for managing css styles applicated on navigation links
- * @returns 
+ * @returns component with whole navigation
  */
 const NavigationLinks = () => {
     const [isClickedOnPersons, setIsClickedOnPersons] = useState(true);

@@ -6,6 +6,7 @@ import {apiGet, apiPost, apiPut} from "../utils/api";
 import InputField from "../components/InputField";
 import FlashMessage from "../components/FlashMessage";
 import InputSelect from "../components/InputSelect";
+import dateStringFormatter from "../utils/dateStringFormatter";
 
 const InvoiceForm = () => {
     const navigate = useNavigate;
@@ -28,12 +29,18 @@ const InvoiceForm = () => {
     const [personList, setPersonList] = useState([]);
     const [sentState, setSent] = useState(false);
     const [successState, setSuccess] = useState(false);
+    const [label, setLabel] = useState("")
+
     const [errorState, setError] = useState(null);
 
     useEffect(() => {
         apiGet("/api/persons").then((data) => setPersonList(data));
+        
         if(id){
         apiGet("/api/invoices/" + id).then((data) => setInvoice(data));
+        setLabel("Upravit");
+        }else {
+            setLabel("Vytvořit");
         }
     },[id]);
 
@@ -51,7 +58,7 @@ const InvoiceForm = () => {
             setSent(true);
             setSuccess(true);
             navigate("/invoices");
-        })
+        });
     }
 
 };
@@ -62,7 +69,7 @@ const InvoiceForm = () => {
 
     return(
         <div className="text-light">
-            <h1>Vytvořit fakturu</h1>
+            <h1>{label} fakturu</h1>
             <hr/>
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>)
@@ -97,7 +104,7 @@ const InvoiceForm = () => {
                             items = {personList}
                             label = "Prodejce"
                             prompt = "Vyberte prodejce"
-                            value = {invoice.seller}
+                            value = {invoice.seller._id}
                             handleChange = {(e) => {
                                 setInvoice({...invoice, seller: {_id :e.target.value}})
                             }}
@@ -111,7 +118,7 @@ const InvoiceForm = () => {
                             items = {personList}
                             label = "Kupující"
                             prompt = "Vyberte kupujícího"
-                            value = {invoice.buyer}
+                            value = {invoice.buyer._id}
                             handleChange = {(e) => {
                                 setInvoice({...invoice, buyer:{_id: e.target.value}})
                             }}
@@ -126,7 +133,7 @@ const InvoiceForm = () => {
                             name = "issued"
                             label = "Vystaveno"
                             prompt = "Doplňte datum vystavení"
-                            value = {invoice.issued}
+                            value = {dateStringFormatter(invoice.issued)}
                             handleChange = {(e) => {
                                 setInvoice({...invoice, issued: e.target.value})
                             }}
@@ -139,7 +146,7 @@ const InvoiceForm = () => {
                             name = "dueDate"
                             label = "Datum splatnosti"
                             prompt = "Doplňte datum splatnosti"
-                            value = {invoice.dueDate}
+                            value = {dateStringFormatter(invoice.dueDate)}
                             handleChange = {(e) => {
                                 setInvoice({...invoice, dueDate: e.target.value})
                             }}

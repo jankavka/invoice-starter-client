@@ -21,6 +21,14 @@ const InvoiceStatistics = () => {
         })
     }, []);
 
+    if(!currentYearSum && !allTimeSum && !invoicesCount){
+        return (
+            <div className="mt-4">
+                <h4>Statistiky všech faktur:</h4>
+                Načítám...
+            </div>
+        );
+    }
     return (
         <div className="mt-3">
             <h4>Statistiky všech faktur:</h4>

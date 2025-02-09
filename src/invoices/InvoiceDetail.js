@@ -48,7 +48,18 @@ const InvoiceDetail = () => {
         })
     },[invoice]);
 
-
+    if(Object.keys(invoice).length === 0){
+        return(
+            <div className="mt-3">
+                Načítám detail faktury...
+                <div>
+                    <button onClick={handleGoBack} className="btn btn-outline-success">
+                        Zpět
+                    </button>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="text-light">
             <h1>Detail faktury</h1>

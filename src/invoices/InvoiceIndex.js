@@ -4,10 +4,12 @@ import { apiDelete, apiGet } from "../utils/api";
 import InvoiceTable from "./InvoiceTable";
 import InvoiceStatistics from "./InvoiceStatistics";
 import InvoiceFilter from "./InvoiceFilter";
+import { useNavigate } from "react-router-dom";
 
 const InvoiceIndex = () => {
     const [invoices, setInvoices] = useState([]);
     const [personsState, setPersonsState] = useState([]);
+    const navigate = useNavigate();
     const [filterState, setFilterState] = useState({
         buyerId: undefined,
         sellerId:undefined,
