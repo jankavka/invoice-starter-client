@@ -26,8 +26,10 @@ import {apiDelete, apiGet} from "../utils/api";
 
 import PersonTable from "./PersonTable";
 
+
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
+    const [fetchMessage, setFetchMessage] = useState("Načítám osoby...");
 
     const deletePerson = async (id) => {
         try {
@@ -43,10 +45,12 @@ const PersonIndex = () => {
         apiGet("/api/persons").then((data) => setPersons(data));
     }, []);
 
-    if(persons.length === 0 ){
+    if(persons.length === 0){
+        setTimeout(()=> setFetchMessage("Nepodařilo se načíst osoby..."),10000);
         return (
             <div>
-                Načítám...
+                <h1>Seznam osob</h1>
+                <p>{fetchMessage}</p>
             </div>
         );
     }

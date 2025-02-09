@@ -9,6 +9,7 @@ const InvoiceStatistics = () => {
     const [currentYearSum, setCurrentYearSum] = useState("");
     const [allTimeSum, setAllTimeSum] = useState("");
     const [invoicesCount, setInvoicesCount] = useState("");
+    const [fetchMessage, setFetchMessage] = useState("Načítám statistiky...");
 
     useEffect(() => {
         apiGet("/api/invoices/statistics").then((data) => {
@@ -22,10 +23,11 @@ const InvoiceStatistics = () => {
     }, []);
 
     if(!currentYearSum && !allTimeSum && !invoicesCount){
+        {setTimeout(()=> setFetchMessage("Nepodařilo se načíst statistiky..."),10000)}
         return (
             <div className="mt-4">
                 <h4>Statistiky všech faktur:</h4>
-                Načítám...
+                <p>{fetchMessage}</p>
             </div>
         );
     }

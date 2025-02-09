@@ -24,7 +24,10 @@ const NavigationLinks = () => {
         if(location.pathname.startsWith("/invoices")){
             setIsClickedOnInvoices(true);
             setIsClickedOnPersons(false);
-        };
+        }else{
+            setIsClickedOnInvoices(false);
+            setIsClickedOnPersons(true);
+        }
     },[])
 
     
