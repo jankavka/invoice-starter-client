@@ -4,12 +4,14 @@ import { apiDelete, apiGet } from "../utils/api";
 import InvoiceTable from "./InvoiceTable";
 import InvoiceStatistics from "./InvoiceStatistics";
 import InvoiceFilter from "./InvoiceFilter";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import FlashMessage from "../components/FlashMessage";
 
 const InvoiceIndex = () => {
     const [invoices, setInvoices] = useState([]);
     const [personsState, setPersonsState] = useState([]);
-    const navigate = useNavigate();
+    const location = useLocation();
+    const {successState} = location.state || {};
     const [filterState, setFilterState] = useState({
         buyerId: undefined,
         sellerId:undefined,
@@ -68,6 +70,11 @@ const InvoiceIndex = () => {
     return(
         <div>
             <h1>Seznam faktur</h1>
+            {successState ?
+            <FlashMessage
+                theme="success"
+                text="Aktualizace faktury proběhla úspěšně"
+            /> : null}
             <InvoiceFilter
                 filter={filterState}
                 handleChange={handleChange}

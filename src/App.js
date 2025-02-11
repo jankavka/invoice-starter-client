@@ -20,7 +20,7 @@
  * Více informací na http://www.itnetwork.cz/licence
  */
 
-import React,{useState} from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import {

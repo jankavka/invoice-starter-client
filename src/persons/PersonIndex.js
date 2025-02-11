@@ -25,11 +25,17 @@ import React, {useEffect, useState} from "react";
 import {apiDelete, apiGet} from "../utils/api";
 
 import PersonTable from "./PersonTable";
+import FlashMessage from "../components/FlashMessage";
+import { useLocation } from "react-router-dom";
 
 
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
     const [fetchMessage, setFetchMessage] = useState("Načítám osoby...");
+    const [personUpdated, setPersonUpdate] = useState(false);
+    const location = useLocation();
+    const {successState} = location.state || {};
+    
 
     const deletePerson = async (id) => {
         try {
@@ -40,6 +46,7 @@ const PersonIndex = () => {
         }
         setPersons(persons.filter((item) => item._id !== id));
     };
+
 
     useEffect(() => {
         apiGet("/api/persons").then((data) => setPersons(data));
@@ -57,6 +64,12 @@ const PersonIndex = () => {
     return (
         <div className="text-light">
             <h1>Seznam osob</h1>
+            {successState ?
+            <FlashMessage
+                theme= "success"
+                text="Aktualizace osobnosti proběhla úspěšně"
+                
+            /> : null}
             <PersonTable
                 deletePerson={deletePerson}
                 items={persons}

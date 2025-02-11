@@ -27,7 +27,6 @@ import {apiGet, apiPost, apiPut} from "../utils/api";
 
 import InputField from "../components/InputField";
 import InputCheck from "../components/InputCheck";
-import FlashMessage from "../components/FlashMessage";
 
 import Country from "./Country";
 
@@ -49,8 +48,7 @@ const PersonForm = () => {
         country: Country.CZECHIA,
         note: ""
     });
-    const [sentState, setSent] = useState(false);
-    const [successState, setSuccess] = useState(false);
+   
     const [errorState, setError] = useState(null);
 
     useEffect(() => {
@@ -64,20 +62,14 @@ const PersonForm = () => {
 
         (id ? apiPut("/api/persons/" + id, person) : apiPost("/api/persons", person))
             .then((data) => {
-                setSent(true);
-                setSuccess(true);
-                navigate("/persons");
+                navigate("/persons", {state: {successState:true}});
             })
             .catch((error) => {
                 console.log(error.message);
                 setError(error.message);
-                setSent(true);
-                setSuccess(false);
             });
     };
 
-    const sent = sentState;
-    const success = successState;
 
     return (
         <div className="text-light">
@@ -86,12 +78,7 @@ const PersonForm = () => {
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>
             ) : null}
-            {sent && (
-                <FlashMessage
-                    theme={success ? "success" : ""}
-                    text={success ? "Uložení osobnosti proběhlo úspěšně." : ""}
-                />
-            )}
+        
             <form onSubmit={handleSubmit}>
                 <div className="row mb-2">
                     <div className="col-md-4">
@@ -293,10 +280,10 @@ const PersonForm = () => {
                     checked={Country.SLOVAKIA === person.country}
                 />
                 <div className="row">
-                    <div className="col-2 col-md-1">
+                    <div className="col-3 col-md-1">
                         <input type="submit" className="btn btn-outline-primary" value="Uložit"/>
                     </div>
-                    <div className="col-2 col-md-1">
+                    <div className="col-3 col-md-1">
                         <Link to={"/persons"} className="btn btn-outline-success">
                             Zpět
                         </Link>

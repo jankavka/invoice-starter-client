@@ -11,7 +11,7 @@ export function InputCheck(props) {
   }
 
   return (
-    <div className="form-group form-check">
+    <div className="form-group form-check mb-3">
       <label className="form-check-label">
         {/* vykreslení s aktuálním typem */}
         <input

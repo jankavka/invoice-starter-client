@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 
-import { apiGet } from "../utils/api";
+import { apiDelete, apiGet } from "../utils/api";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import dateStringFormatter from "../utils/dateStringFormatter";
 
@@ -21,12 +21,19 @@ const InvoiceDetail = () => {
         navigate(-1);
     }
 
+    const deleteThisInvoice = async() => {
+        try{
+            apiDelete("/api/invoices/" + id);
+        }catch(error){
+            console.log(error);
+        }
+        navigate("/invoices");
+    }
 
     useEffect(() => {
         apiGet("/api/invoices/" + id)
         .then((data) => {
-            setInvoice(data);
-            
+            setInvoice(data); 
         })
         .catch((error) => {
             console.error(error);
@@ -42,10 +49,7 @@ const InvoiceDetail = () => {
             setBuyerId(data.buyer._id);
             setBuyerHidden(data.buyer.hidden);
             setSellerHidden(data.seller.hidden);
-            
-            
-
-        })
+        });
     },[invoice]);
 
     if(Object.keys(invoice).length === 0){
@@ -63,6 +67,28 @@ const InvoiceDetail = () => {
     return (
         <div className="text-light">
             <h1>Detail faktury</h1>
+            <div className="d-md-flex justify-content-end">
+                <div className="btn-group col-3">
+                    <Link
+                        to={"/invoices/show/" + invoice._id}
+                        className="btn btn-sm btn-outline-info"
+                    >
+                        Detail
+                    </Link>
+                    <Link
+                        to={"/invoices/edit/" + invoice._id}
+                        className="btn btn-sm btn-outline-warning"
+                    >
+                        Upravit
+                    </Link>
+                    <button
+                        onClick={() => deleteThisInvoice(id)}
+                        className="btn btn-sm btn-outline-danger"
+                    >   
+                        Vymazat
+                    </button>  
+                </div>
+            </div>
             <br/>
             <table className="table text-light">
                 

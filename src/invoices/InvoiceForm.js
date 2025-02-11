@@ -4,12 +4,11 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {apiGet, apiPost, apiPut} from "../utils/api";
 
 import InputField from "../components/InputField";
-import FlashMessage from "../components/FlashMessage";
 import InputSelect from "../components/InputSelect";
 import dateStringFormatter from "../utils/dateStringFormatter";
 
 const InvoiceForm = () => {
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     const {id} = useParams();
     const [invoice, setInvoice] = useState({
         invoiceNumber:"",
@@ -23,63 +22,48 @@ const InvoiceForm = () => {
         dueDate:"",
         product:"",
         price:"",
-        vat:"",
+        vat:"21",
         note:""
     });
-    const [personList, setPersonList] = useState([]);
-    const [sentState, setSent] = useState(false);
-    const [successState, setSuccess] = useState(false);
-    const [label, setLabel] = useState("")
 
+    const [personList, setPersonList] = useState([]);
     const [errorState, setError] = useState(null);
 
     useEffect(() => {
         apiGet("/api/persons").then((data) => setPersonList(data));
         
         if(id){
-        apiGet("/api/invoices/" + id).then((data) => setInvoice(data));
-        setLabel("Upravit");
-        }else {
-            setLabel("Vytvořit");
+            apiGet("/api/invoices/" + id).then((data) => setInvoice(data));
         }
     },[id]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!id){
-        apiPost("/api/invoices", invoice).then((data) => {
-            setSent(true);
-            setSuccess(true);
+        apiPost("/api/invoices", invoice).then(() => {
             navigate("/invoices");
         
-        });
+        })
         }else{
         apiPut("/api/invoices/" + id, invoice).then(() => {
-            setSent(true);
-            setSuccess(true);
-            navigate("/invoices");
-        });
+            navigate("/invoices", {state: {successState:true}});
+        })
+        .catch((error) => {
+            console.log(error.message)
+            setError(error.message);
+        })
     }
 
 };
 
-    const sent = sentState;
-    const success = successState;
-
 
     return(
         <div className="text-light">
-            <h1>{label} fakturu</h1>
+            <h1>{id ? "Upravit":"Vytvořit"} fakturu</h1>
             <hr/>
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>)
             : null}
-            {sent && (
-                <FlashMessage
-                    theme={success ? "success" : ""}
-                    text={success ? "Uložení faktury proběhlo úspěšně." : ""}
-                />
-            )}
             <form onSubmit={handleSubmit}>
                 <div className="row mb-3">
                     <div className="col-md-4">
@@ -99,7 +83,6 @@ const InvoiceForm = () => {
                     <div className="col-md-4">
                         <InputSelect
                             required = {true}
-                            //multiple = {true}
                             name = "seller"
                             items = {personList}
                             label = "Prodejce"
@@ -113,7 +96,6 @@ const InvoiceForm = () => {
                     <div className="col-md-4">
                         <InputSelect
                             required = {true}
-                            //multiple = {true}
                             name = "buyer"
                             items = {personList}
                             label = "Kupující"

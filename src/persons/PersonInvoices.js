@@ -22,8 +22,8 @@ const PersonInvoices = ({invoicesType, label}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {invoicesType.map((item) => (
-                        <tr>
+                    {invoicesType.map((item, index) => (
+                        <tr key={index} >
                             <td><Link to={"/invoices/show/" + item._id}>{item.invoiceNumber}</Link></td>
                             <td>{item.note}</td>
                        </tr> 

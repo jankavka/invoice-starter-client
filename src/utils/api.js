@@ -27,9 +27,11 @@ const fetchData = (url, requestOptions) => {
     const apiUrl = `${API_URL}${url}`;
 
     return fetch(apiUrl, requestOptions)
-        .then((response) => {
+        .then(async(response) => {
             if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+                const errorResponse = await response.json();
+                console.log(errorResponse.message);
+                throw new Error(`Network response was not ok: ${response.status} ${response.statusText} ${errorResponse.message}`);
             }
 
             if (requestOptions.method !== 'DELETE')

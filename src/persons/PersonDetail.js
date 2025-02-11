@@ -21,9 +21,9 @@
  */
 
 import React, {useEffect, useState} from "react";
-import { useParams, useNavigate} from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 
-import {apiGet} from "../utils/api";
+import {apiDelete, apiGet} from "../utils/api";
 import Country from "./Country";
 import PersonInvoices from "./PersonInvoices";
 
@@ -34,6 +34,16 @@ const PersonDetail = () => {
     const [salesState, setSales] = useState([]);
     const [purchasesState, setPurchases] = useState([]);
     const navigate = useNavigate();
+    const [identificationNumber, setIdentificationNumber] = useState("");
+   
+    const deleteThisPerson = async() => {
+        try{
+            await apiDelete("/api/persons/" + id);
+        }catch (error){
+            console.log(error);
+        }
+        navigate("/persons");
+    }
 
     const handleGoBack = () => {
         navigate(-1);
@@ -43,6 +53,7 @@ const PersonDetail = () => {
         // TODO: Add HTTP req.
         apiGet("/api/persons/" + id)
         .then((data) => {
+            setIdentificationNumber(data?.identificationNumber);
             setPerson(data);
         })
         .catch((error) => {
@@ -52,8 +63,10 @@ const PersonDetail = () => {
     const country = Country.CZECHIA === person.country ? "Česká republika" : "Slovensko";
 
     useEffect(() => {
-        apiGet("/api/identification/" + person.identificationNumber + "/sales").then((data) => setSales(data));
-        apiGet("/api/identification/" + person.identificationNumber + "/purchases").then((data) => setPurchases(data));
+        if(identificationNumber){
+        apiGet("/api/identification/" + identificationNumber + "/sales").then((data) => setSales(data));
+        apiGet("/api/identification/" + identificationNumber + "/purchases").then((data) => setPurchases(data));
+        }
     },[person])
 
 
@@ -74,6 +87,22 @@ const PersonDetail = () => {
         <>
             <div>
                 <h1>Detail osoby: {person.name}</h1>
+                <div className="d-md-flex justify-content-end">
+                    <div className="btn-group col-3">
+                                    <Link
+                                        to={"/persons/edit/" + person._id}
+                                        className="btn btn-sm btn-outline-warning"
+                                    >
+                                        Upravit
+                                    </Link>
+                                    <button
+                                        onClick={deleteThisPerson}
+                                        className="btn btn-sm btn-outline-danger"
+                                    >
+                                        Odstranit
+                                    </button>
+                    </div>
+                </div>
                 <hr/>
                 <div className="row mb-3">
                     <div className="col">

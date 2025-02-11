@@ -24,6 +24,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PersonStatistics from "./PersonStatistics";
 
+
 const PersonTable = ({label, items, deletePerson}) => {
     
     return (
