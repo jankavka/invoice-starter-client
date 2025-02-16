@@ -10,6 +10,8 @@ import dateStringFormatter from "../utils/dateStringFormatter";
 const InvoiceForm = () => {
     const navigate = useNavigate();
     const {id} = useParams();
+    const [personList, setPersonList] = useState([]);
+    const [errorState, setError] = useState();
     const [invoice, setInvoice] = useState({
         invoiceNumber:"",
         seller:{
@@ -26,8 +28,7 @@ const InvoiceForm = () => {
         note:""
     });
 
-    const [personList, setPersonList] = useState([]);
-    const [errorState, setError] = useState(null);
+    
 
     useEffect(() => {
         apiGet("/api/persons").then((data) => setPersonList(data));
@@ -35,26 +36,26 @@ const InvoiceForm = () => {
         if(id){
             apiGet("/api/invoices/" + id).then((data) => setInvoice(data));
         }
-    },[id]);
+    },[]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!id){
-        apiPost("/api/invoices", invoice).then(() => {
-            navigate("/invoices");
-        
-        })
-        }else{
-        apiPut("/api/invoices/" + id, invoice).then(() => {
-            navigate("/invoices", {state: {successState:true}});
-        })
-        .catch((error) => {
-            console.log(error.message)
-            setError(error.message);
-        })
-    }
 
-};
+        (id ?  
+            apiPut("/api/invoices/" + id, invoice).then(() => {
+                navigate("/invoices", {state: {successState:true}});
+            }):
+            apiPost("/api/invoices", invoice).then(() => {
+                navigate("/invoices", {state: {successState:true, newInvoice: true}});
+                console.log(invoice.seller._id, invoice.buyer._id)
+            
+            }))
+            .catch((error) => {
+                console.log("tato chyba:" + error.message)
+                setError(error.message);
+            })
+
+    };
 
 
     return(
@@ -62,7 +63,9 @@ const InvoiceForm = () => {
             <h1>{id ? "Upravit":"Vytvořit"} fakturu</h1>
             <hr/>
             {errorState ? (
-                <div className="alert alert-danger">{errorState}</div>)
+                <div className="alert alert-danger">
+                    <span>{errorState} <br></br> Je nutné vyplnit všechna pole</span>
+                </div>)
             : null}
             <form onSubmit={handleSubmit}>
                 <div className="row mb-3">
@@ -82,20 +85,20 @@ const InvoiceForm = () => {
                     </div>
                     <div className="col-md-4">
                         <InputSelect
-                            required = {true}
+                            //required = {true}
                             name = "seller"
                             items = {personList}
                             label = "Prodejce"
                             prompt = "Vyberte prodejce"
                             value = {invoice.seller._id}
                             handleChange = {(e) => {
-                                setInvoice({...invoice, seller: {_id :e.target.value}})
+                                setInvoice({...invoice, seller: {_id: e.target.value}})
                             }}
                         />
                     </div>
                     <div className="col-md-4">
                         <InputSelect
-                            required = {true}
+                            //required = {true}
                             name = "buyer"
                             items = {personList}
                             label = "Kupující"
@@ -156,7 +159,7 @@ const InvoiceForm = () => {
                             type = "number"
                             name = "price"
                             label = "Cena (Kč)"
-                            prompt = "Vyplňte název produktu"
+                            prompt = "Vyplňte cenu"
                             value = {invoice.price}
                             handleChange = {(e) => {
                                 setInvoice({...invoice, price: e.target.value})

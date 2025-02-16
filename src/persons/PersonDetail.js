@@ -42,7 +42,7 @@ const PersonDetail = () => {
         }catch (error){
             console.log(error);
         }
-        navigate("/persons");
+        navigate("/persons", {state: {deleteSuccess: true}});
     }
 
     const handleGoBack = () => {
@@ -89,18 +89,18 @@ const PersonDetail = () => {
                 <h1>Detail osoby: {person.name}</h1>
                 <div className="d-md-flex justify-content-end">
                     <div className="btn-group col-3">
-                                    <Link
-                                        to={"/persons/edit/" + person._id}
-                                        className="btn btn-sm btn-outline-warning"
-                                    >
-                                        Upravit
-                                    </Link>
-                                    <button
-                                        onClick={deleteThisPerson}
-                                        className="btn btn-sm btn-outline-danger"
-                                    >
-                                        Odstranit
-                                    </button>
+                        <Link
+                            to={"/persons/edit/" + person._id}
+                            className="btn btn-sm btn-outline-warning"
+                        >
+                            Upravit
+                        </Link>
+                        <button
+                            onClick={deleteThisPerson}
+                            className="btn btn-sm btn-outline-danger"
+                        >
+                            Odstranit
+                        </button>
                     </div>
                 </div>
                 <hr/>

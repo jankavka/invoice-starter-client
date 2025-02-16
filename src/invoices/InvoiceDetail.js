@@ -27,7 +27,7 @@ const InvoiceDetail = () => {
         }catch(error){
             console.log(error);
         }
-        navigate("/invoices");
+        navigate("/invoices", {state: {deleteSuccess: true}});
     }
 
     useEffect(() => {
@@ -69,12 +69,6 @@ const InvoiceDetail = () => {
             <h1>Detail faktury</h1>
             <div className="d-md-flex justify-content-end">
                 <div className="btn-group col-3">
-                    <Link
-                        to={"/invoices/show/" + invoice._id}
-                        className="btn btn-sm btn-outline-info"
-                    >
-                        Detail
-                    </Link>
                     <Link
                         to={"/invoices/edit/" + invoice._id}
                         className="btn btn-sm btn-outline-warning"

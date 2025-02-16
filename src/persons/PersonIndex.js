@@ -32,25 +32,33 @@ import { useLocation } from "react-router-dom";
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
     const [fetchMessage, setFetchMessage] = useState("Načítám osoby...");
-    const [personUpdated, setPersonUpdate] = useState(false);
     const location = useLocation();
-    const {successState} = location.state || {};
+    const successState = ({createSuccessState:false});
+    const newPersonState = ({newPerson:false});
+    const [deleteSuccessState, setDeleteSuccessState] = useState({deleteSuccess:false});
+    const {deleteSuccess} = location.state || deleteSuccessState;
+    const {createSuccessState} = location.state || successState;
+    const {newPerson} = location.state || newPersonState;
     
 
     const deletePerson = async (id) => {
         try {
             await apiDelete("/api/persons/" + id);
+
         } catch (error) {
             console.log(error.message);
-            alert(error.message)
+            alert(error.message)   
         }
         setPersons(persons.filter((item) => item._id !== id));
+        setDeleteSuccessState({deleteSuccess:true});
+        
     };
-
 
     useEffect(() => {
         apiGet("/api/persons").then((data) => setPersons(data));
     }, []);
+
+        
 
     if(persons.length === 0){
         setTimeout(()=> setFetchMessage("Nepodařilo se načíst osoby..."),10000);
@@ -60,16 +68,38 @@ const PersonIndex = () => {
                 <p>{fetchMessage}</p>
             </div>
         );
-    }
+    };
+
+    
     return (
         <div className="text-light">
             <h1>Seznam osob</h1>
-            {successState ?
-            <FlashMessage
-                theme= "success"
-                text="Aktualizace osobnosti proběhla úspěšně"
-                
-            /> : null}
+            {newPerson ?
+            <div>
+                <FlashMessage
+                    theme="success"
+                    text="Vytvoření nové osobnosti proběhlo úspěšně"
+                    items={persons}
+                />
+            </div>:
+            createSuccessState ?
+            <div>
+                <FlashMessage
+                    theme= "success"
+                    text="Aktualizace osobnosti proběhla úspěšně"
+                    items={persons}
+                    
+                /> 
+            </div>: null}
+            {deleteSuccess ?
+            <div>
+                <FlashMessage
+                    theme="success"
+                    text="Vymazání osoby proběhlo úspěšně"
+                    items={persons}
+                />
+            </div>
+            : null}
             <PersonTable
                 deletePerson={deletePerson}
                 items={persons}
@@ -78,4 +108,5 @@ const PersonIndex = () => {
         </div>
     );
 };
+
 export default PersonIndex;

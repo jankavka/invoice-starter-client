@@ -61,8 +61,12 @@ const PersonForm = () => {
         e.preventDefault();
 
         (id ? apiPut("/api/persons/" + id, person) : apiPost("/api/persons", person))
-            .then((data) => {
-                navigate("/persons", {state: {successState:true}});
+            .then(() => {
+                if(id){
+                    navigate("/persons", {state: {createSuccessState:true}});
+                }else{
+                    navigate("/persons",{state: {createSuccessState:true, newPerson:true}});
+                }
             })
             .catch((error) => {
                 console.log(error.message);

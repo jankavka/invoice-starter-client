@@ -11,7 +11,12 @@ const InvoiceIndex = () => {
     const [invoices, setInvoices] = useState([]);
     const [personsState, setPersonsState] = useState([]);
     const location = useLocation();
-    const {successState} = location.state || {};
+    const [deleteSuccessState, setDeleteSuccessState] = useState({});
+    const createSuccessState = {successState: false};
+    const newInvoiceState = {newInvoice: false};
+    const {deleteSuccess} = location.state || deleteSuccessState;
+    const {successState} = location.state || createSuccessState;
+    const {newInvoice} = location.state || newInvoiceState;
     const [filterState, setFilterState] = useState({
         buyerId: undefined,
         sellerId:undefined,
@@ -29,12 +34,16 @@ const InvoiceIndex = () => {
             alert(error.message);
         }
         setInvoices(invoices.filter((item) => item._id !== id)); 
+        setDeleteSuccessState({deleteSuccess:true});
+        console.log(deleteSuccess);
+        setTimeout(() => {setDeleteSuccessState(false)}, 7500);
     };
 
 
     useEffect(() => {
         apiGet("/api/invoices").then((data) => setInvoices(data));
         apiGet("/api/persons").then((data) => setPersonsState(data));
+        console.log(successState);
     }, [])
 
     const handleChange = (e) => {
@@ -53,6 +62,8 @@ const InvoiceIndex = () => {
         e.preventDefault();
         const params = filterState;
         apiGet("/api/invoices", params).then((data) => setInvoices(data));
+        // to not show FlashMessage while starting filtering
+        setDeleteSuccessState({deleteSuccess:false});
     };
 
 
@@ -70,11 +81,29 @@ const InvoiceIndex = () => {
     return(
         <div>
             <h1>Seznam faktur</h1>
-            {successState ?
+            {newInvoice ? 
+            <div>
+                <FlashMessage
+                    theme="success"
+                    text="Vytvoření nové faktury proběhlo úspěšně"
+                    items={invoices}
+                />
+            </div>:
+            successState ?
             <FlashMessage
                 theme="success"
                 text="Aktualizace faktury proběhla úspěšně"
+                items={invoices}
             /> : null}
+            {deleteSuccess ?
+                <div>
+                    <FlashMessage
+                        theme="success"
+                        text="Vymazání faktury probehlo úspěšně"
+                        items={invoices}
+                    />
+                </div>
+                : null}
             <InvoiceFilter
                 filter={filterState}
                 handleChange={handleChange}
