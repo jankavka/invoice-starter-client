@@ -37,6 +37,7 @@ import InvoiceForm from "./invoices/InvoiceForm";
 import InvoiceIndex from "./invoices/InvoiceIndex";
 import InvoiceDetail from "./invoices/InvoiceDetail";
 import NavigationLinks from "./components/NavigationLinks";
+import InvoicePdfViewer from "./invoices/InvoicePdfViewer";
 
 export function App() {
   
@@ -59,6 +60,7 @@ export function App() {
               <Route path="create" element={<InvoiceForm />}/>
               <Route path="edit/:id" element={<InvoiceForm/>}/>
               <Route path="show/:id" element={<InvoiceDetail/>}/>
+              <Route path="show/:id/pdf" element={<InvoicePdfViewer/>}/>
             </Route>
           </Routes>
         </div>

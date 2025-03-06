@@ -35,7 +35,7 @@ const InvoiceIndex = () => {
         }
         setInvoices(invoices.filter((item) => item._id !== id)); 
         setDeleteSuccessState({deleteSuccess:true});
-        console.log(deleteSuccess);
+        //console.log(deleteSuccess);
         setTimeout(() => {setDeleteSuccessState(false)}, 7500);
     };
 
@@ -43,6 +43,7 @@ const InvoiceIndex = () => {
     useEffect(() => {
         apiGet("/api/invoices").then((data) => setInvoices(data));
         apiGet("/api/persons").then((data) => setPersonsState(data));
+        //apiGet("/api/invoices/" + invoices._id + "/pdf").then((data) => setInvoices(prevState => {return {...prevState, invoicePdf: data}}));
         console.log(successState);
     }, [])
 

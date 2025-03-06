@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 
-import { apiDelete, apiGet } from "../utils/api";
+import { apiDelete, apiGet, apiGetPdf } from "../utils/api";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import dateStringFormatter from "../utils/dateStringFormatter";
 
@@ -37,7 +37,7 @@ const InvoiceDetail = () => {
         })
         .catch((error) => {
             console.error(error);
-        })
+        });
     }, []);
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const InvoiceDetail = () => {
                         className="btn btn-sm btn-outline-danger"
                     >   
                         Vymazat
-                    </button>  
+                    </button> 
                 </div>
             </div>
             <br/>
@@ -135,9 +135,15 @@ const InvoiceDetail = () => {
                     </tbody>
                 </table>
             <div>
-                <button onClick={handleGoBack} className="btn btn-outline-success">
+                <button onClick={handleGoBack} className="btn btn-outline-success col-2">
                     Zpět
                 </button>
+                <Link
+                    to={"/invoices/show/" + id + "/pdf"}
+                    className="btn btn-outline-info col-2"
+                >
+                    PDF
+                </Link>
             </div>
             
         </div>

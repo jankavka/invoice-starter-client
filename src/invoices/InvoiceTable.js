@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 
 const InvoiceTable = ({items, deleteInvoice, label}) => {
 
-    const [fetchMessage, setFetchMessage] = useState("Načítám faktury...")
+    const [fetchMessage, setFetchMessage] = useState("Načítám faktury...");
+    
 
 
-    return(
+    return (
         
         <div>
             <span className="collapse">{setTimeout(()=> setFetchMessage("Nepodařilo se načíst faktury..."),10000)}</span>
@@ -62,7 +64,7 @@ const InvoiceTable = ({items, deleteInvoice, label}) => {
             </div>}
             <Link to={"/invoices/create"} className="btn btn-outline-success">
                     Nová faktura
-                </Link>
+            </Link>
         </div>
     );
 };
