@@ -42,17 +42,15 @@ const fetchData = (url, requestOptions) => {
         });
 };
 
-export const apiGetPdf = async(url) => {
-    const apiUrl = `${API_URL}${url}`;
+export const apiGetPdf = (url) => {
+    const apiUrl = url;
     const requestOptions = {
         method: "GET",
         headers: {
             'Content-Type': 'application/pdf',
         },
     }
-    const response = await fetch(apiUrl, requestOptions);
-
-    return await response.blob();
+    return fetchData(apiUrl, requestOptions)
 }
 
 export const apiGet = (url, params) => {
