@@ -19,12 +19,13 @@ const InvoicePdfViewer = () => {
         apiGetPdf("/api/invoices/" + id + "/pdf")
         .then((data) => {
             setInvoicePdf(URL.createObjectURL(data))
+            
         })
         .catch((error) => {
             console.error(error);
-            setInvoicePdf(null);
         })
-    }, []);
+        console.log(invoicePdf);
+    }, [id]);
 
     return (
         <div>
@@ -32,7 +33,7 @@ const InvoicePdfViewer = () => {
                 
                <iframe
                     src={invoicePdf}
-                    style={{ width: '100%', height: '700px' }} 
+                    style={{ alignItems: "start", width: '100%', height: '700px' }} 
                 />:
                <p>Fakturu se nepodařilo načíst</p>
             }

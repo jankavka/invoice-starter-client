@@ -44,7 +44,7 @@ const InvoiceIndex = () => {
         apiGet("/api/invoices").then((data) => setInvoices(data));
         apiGet("/api/persons").then((data) => setPersonsState(data));
         //apiGet("/api/invoices/" + invoices._id + "/pdf").then((data) => setInvoices(prevState => {return {...prevState, invoicePdf: data}}));
-        console.log(successState);
+        
     }, [])
 
     const handleChange = (e) => {
