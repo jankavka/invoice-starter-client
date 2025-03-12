@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { apiGetPdf } from "../utils/api"
 import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const InvoicePdfViewer = () => {
     const [invoicePdf, setInvoicePdf] = useState(null);
@@ -24,27 +25,32 @@ const InvoicePdfViewer = () => {
         .catch((error) => {
             console.error(error);
         })
-        console.log(invoicePdf);
+        
     }, [id]);
 
     return (
         <div>
+            <Link onClick={() => window.open(invoicePdf, "_blank")}  >
+                    Otevřít v PDF novém okně
+            </Link>
+            
             {invoicePdf ?
                 
                <iframe
                     src={invoicePdf}
-                    style={{ alignItems: "start", width: '100%', height: '700px' }} 
+                    style={{width: '100%', height: '100vh', overflow: 'auto' }} 
                 />:
                <p>Fakturu se nepodařilo načíst</p>
             }
-
+            <div className="clearfix"></div>
             <div>
                 <button 
                     onClick={handleGoBack}
-                    className="btn btn-outline-success"
+                    className="btn btn-outline-success col-2 "
                 >
                     Zpět
                 </button>
+                
             </div>
 
         </div>
